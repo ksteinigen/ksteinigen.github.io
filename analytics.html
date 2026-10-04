@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#faf8f3">
+    <meta name="description" content="Explore sample pet-care visit data with an interactive service chart.">
+    <title>Pet Care Analytics — Goodkind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="data.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
+    <script src="analytics.js" defer></script>
+  </head>
+  <body>
+    <div class="announcement">Sample data for a student project. <a href="managepets.html">Explore the care records →</a></div>
+    <div class="shell">
+      <header>
+        <a class="brand" href="index.html" aria-label="Goodkind home"><span class="brand-mark" aria-hidden="true">g</span>goodkind</a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
+          <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="aboutus.html">About us</a>
+          <a href="managepets.html">Manage care</a>
+          <a href="analytics.html" aria-current="page">Analytics</a>
+          <a class="button" href="managepets.html">Manage visits <span aria-hidden="true">↗</span></a>
+        </nav>
+      </header>
+
+      <main class="page-main">
+        <section class="page-intro page-intro-compact">
+          <p class="eyebrow">A closer look at pet care</p>
+          <h1>Little visits, <em>big picture.</em></h1>
+          <p>See how the sample care visits are split across Goodkind's three services. Add, edit, or delete records to change the chart.</p>
+        </section>
+
+        <section class="analytics-summary" aria-label="Summary of care visit data">
+          <article class="summary-card"><span class="summary-icon" aria-hidden="true">🐾</span><span class="summary-label">Visits in this demo</span><strong id="total-visits">—</strong></article>
+          <article class="summary-card"><span class="summary-icon" aria-hidden="true">✂️</span><span class="summary-label">Most-booked service</span><strong id="top-service">—</strong></article>
+          <article class="summary-card"><span class="summary-icon" aria-hidden="true">☀️</span><span class="summary-label">Scheduled visits</span><strong id="scheduled-visits">—</strong></article>
+        </section>
+
+        <section class="chart-card" aria-labelledby="chart-title">
+          <div class="chart-heading">
+            <div><p class="eyebrow">Visits by service</p><h2 id="chart-title">What the pack books</h2></div>
+            <span class="sample-tag">Illustrative sample data</span>
+          </div>
+          <p id="chart-error" class="notice notice-error" role="alert" hidden></p>
+          <div class="chart-wrap"><canvas id="service-chart" role="img" aria-label="Bar chart showing the number of sample visits for grooming, daycare, and walks"></canvas></div>
+          <p class="chart-caption">Counts reflect the sample records saved in this browser. Your changes appear here when you revisit this page.</p>
+        </section>
+
+        <p class="local-data-note"><strong>About this visualization:</strong> this is illustrative course-project data, not research or actual customer information. The demo stores records in your browser and does not send data to a server.</p>
+      </main>
+
+      <footer>
+        <div class="footer-top">
+          <div class="footer-brand"><a class="brand" href="index.html" aria-label="Goodkind home"><span class="brand-mark" aria-hidden="true">g</span>goodkind</a><p>A neighborhood kind of pet care. Here for the whole pack.</p></div>
+          <nav class="footer-links" aria-label="Footer navigation"><a href="index.html">Home</a><a href="aboutus.html">About us</a><a href="managepets.html">Manage care</a><a href="analytics.html">Analytics</a></nav>
+        </div>
+        <div class="footer-bottom"><span>© <span id="year"></span> Goodkind Pet Co. Illustrative data only.</span><a href="https://github.com/ksteinigen/ksteinigen.github.io" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a></div>
+      </footer>
+    </div>
+  </body>
+</html>

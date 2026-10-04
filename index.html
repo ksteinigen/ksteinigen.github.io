@@ -9,273 +9,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        color-scheme: light;
-        --ink: #20352d;
-        --muted: #68746c;
-        --cream: #faf8f3;
-        --green: #dce8d9;
-        --green-dark: #355746;
-        --orange: #f2784b;
-        --line: #e9e6dc;
-        --serif: Georgia, "Times New Roman", serif;
-        --sans: "DM Sans", sans-serif;
-        --display: "Manrope", sans-serif;
-      }
-
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        background: var(--cream);
-        color: var(--ink);
-        font-family: var(--sans);
-        -webkit-font-smoothing: antialiased;
-      }
-      button, input, select, textarea { font: inherit; }
-      button, a { -webkit-tap-highlight-color: transparent; }
-      a { color: inherit; text-decoration: none; }
-      button { color: inherit; }
-      img { display: block; max-width: 100%; }
-
-      .announcement {
-        min-height: 34px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 7px 16px;
-        background: var(--green-dark);
-        color: #fff;
-        font-size: 11px;
-        letter-spacing: .07em;
-        text-align: center;
-      }
-      .announcement a { margin-left: 7px; text-decoration: underline; text-underline-offset: 3px; }
-      .shell { width: min(1120px, calc(100% - 64px)); margin: 0 auto; }
-
-      header {
-        height: 81px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(32, 53, 45, .09);
-      }
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        font: 800 24px var(--display);
-        letter-spacing: -.09em;
-      }
-      .brand-mark {
-        width: 30px;
-        height: 30px;
-        display: grid;
-        place-items: center;
-        border-radius: 50% 50% 48% 48%;
-        background: var(--orange);
-        color: white;
-        font-size: 17px;
-        letter-spacing: 0;
-        transform: rotate(-8deg);
-      }
-      .nav-links { display: flex; align-items: center; gap: 36px; color: #536057; font-size: 13px; }
-      .nav-links a:not(.button):hover, .footer-links a:hover { color: var(--orange); }
-      .button {
-        min-height: 45px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 0 20px;
-        border: 0;
-        border-radius: 999px;
-        background: var(--ink);
-        color: white;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 700;
-        transition: transform .2s, background .2s;
-      }
-      .button:hover { background: #355746; transform: translateY(-2px); }
-      .button.light { background: white; color: var(--ink); }
-      .button.light:hover { background: #f1eee6; }
-      .button.orange { background: var(--orange); color: #fff; }
-      .button.orange:hover { background: #de6338; }
-      .button svg { width: 15px; height: 15px; }
-      .menu-toggle { display: none; border: 0; background: transparent; padding: 8px; cursor: pointer; }
-
-      .hero { min-height: 545px; display: grid; grid-template-columns: .94fr 1.06fr; align-items: center; gap: 38px; padding: 50px 0 60px; }
-      .hero-copy { padding: 2px 0 0 20px; }
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin: 0 0 18px;
-        color: #697b6b;
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: .15em;
-        text-transform: uppercase;
-      }
-      .eyebrow::before { width: 20px; height: 1px; background: var(--orange); content: ""; }
-      h1, h2, h3, p { margin-top: 0; }
-      h1, h2 { font-family: var(--display); }
-      h1 { max-width: 485px; margin-bottom: 18px; font-size: clamp(43px, 5.4vw, 66px); font-weight: 600; line-height: 1.06; letter-spacing: -.075em; }
-      h1 em { color: var(--orange); font-family: var(--serif); font-weight: 400; letter-spacing: -.06em; }
-      .hero-copy > p:not(.eyebrow) { max-width: 390px; margin-bottom: 26px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-      .hero-actions { display: flex; align-items: center; gap: 17px; }
-      .text-link { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; }
-      .text-link span { color: var(--orange); font-size: 17px; transition: transform .2s; }
-      .text-link:hover span { transform: translateX(4px); }
-      .rating { display: flex; align-items: center; gap: 10px; margin-top: 34px; color: var(--muted); font-size: 11px; }
-      .avatars { display: flex; padding-left: 3px; }
-      .avatars img { width: 29px; height: 29px; margin-left: -4px; border: 2px solid var(--cream); border-radius: 50%; object-fit: cover; }
-      .stars { color: #e49a49; letter-spacing: .08em; }
-      .rating b { color: var(--ink); }
-      .hero-visual { position: relative; min-width: 0; }
-      .hero-image-wrap { height: 407px; overflow: hidden; border-radius: 48% 48% 15px 15px; background: #e6dbc9; }
-      .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 46%; }
-      .floating-note {
-        position: absolute;
-        right: -20px;
-        bottom: 31px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 14px 18px;
-        border: 1px solid rgba(32, 53, 45, .06);
-        border-radius: 13px;
-        background: white;
-        box-shadow: 0 12px 36px rgba(37, 48, 38, .1);
-      }
-      .note-icon { width: 37px; height: 37px; display: grid; place-items: center; border-radius: 50%; background: #fae6da; font-size: 18px; }
-      .floating-note strong, .floating-note small { display: block; }
-      .floating-note strong { margin-bottom: 3px; font-size: 12px; }
-      .floating-note small { color: var(--muted); font-size: 10px; }
-      .image-caption { position: absolute; top: 35px; left: -28px; width: 94px; height: 94px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: var(--green-dark); font: italic 12px/1.4 var(--serif); text-align: center; transform: rotate(-9deg); }
-
-      .trust-strip { padding: 21px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-      .trust-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-      .trust-intro { color: #879087; font-size: 10px; letter-spacing: .11em; text-transform: uppercase; }
-      .trust-item { display: flex; align-items: center; gap: 8px; color: #68746c; font-size: 11px; }
-      .trust-item span { color: #799074; font-size: 16px; }
-
-      section.content-section { padding: 96px 0; }
-      .section-heading { max-width: 550px; margin: 0 auto 40px; text-align: center; }
-      .section-heading .eyebrow { justify-content: center; }
-      h2 { margin-bottom: 12px; font-size: clamp(32px, 4vw, 43px); font-weight: 600; line-height: 1.12; letter-spacing: -.065em; }
-      .section-heading > p:last-child { max-width: 415px; margin: 0 auto; color: var(--muted); font-size: 13px; line-height: 1.7; }
-      .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
-      .service-card { min-height: 260px; padding: 27px 25px; border: 1px solid var(--line); border-radius: 14px; background: #fffefa; transition: transform .2s, box-shadow .2s; }
-      .service-card:hover { transform: translateY(-4px); box-shadow: 0 14px 35px rgba(37, 48, 38, .07); }
-      .service-icon { width: 47px; height: 47px; display: grid; place-items: center; margin-bottom: 24px; border-radius: 15px; background: #f6e9dc; font-size: 23px; }
-      .service-card:nth-child(2) .service-icon { background: #e1eadc; }
-      .service-card:nth-child(3) .service-icon { background: #eee6f0; }
-      .service-card h3 { margin-bottom: 8px; font: 700 19px var(--display); letter-spacing: -.05em; }
-      .service-card p { min-height: 44px; margin-bottom: 17px; color: var(--muted); font-size: 12px; line-height: 1.7; }
-
-      .about-section { padding: 78px 0; background: #edf1e8; }
-      .about-inner { display: grid; grid-template-columns: .94fr 1.06fr; align-items: center; gap: 80px; }
-      .about-visual { position: relative; }
-      .about-visual img { width: 100%; height: 346px; border-radius: 10px 10px 42% 10px; object-fit: cover; }
-      .about-stamp { position: absolute; right: -20px; bottom: 22px; width: 91px; height: 91px; display: grid; place-items: center; border: 7px solid #edf1e8; border-radius: 50%; background: var(--orange); color: #fff; font: italic 12px/1.3 var(--serif); text-align: center; transform: rotate(9deg); }
-      .about-copy { max-width: 425px; }
-      .about-copy h2 { max-width: 400px; }
-      .about-copy > p:not(.eyebrow) { color: var(--muted); font-size: 13px; line-height: 1.85; }
-      .about-points { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; margin: 23px 0 26px; }
-      .about-point { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; }
-      .about-point span { color: #658365; }
-
-      .quote-section { padding: 86px 0; text-align: center; }
-      .quote-mark { color: var(--orange); font: 55px/.65 var(--serif); }
-      blockquote { max-width: 690px; margin: 19px auto 21px; font: 400 clamp(22px, 3vw, 31px)/1.4 var(--serif); letter-spacing: -.025em; }
-      .quote-author { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--muted); font-size: 11px; }
-      .quote-author img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
-      .quote-author strong { color: var(--ink); }
-
-      .cta-panel { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 28px; overflow: hidden; margin-bottom: 75px; padding: 44px 54px; border-radius: 15px; background: var(--green-dark); color: #fff; }
-      .cta-panel::after { position: absolute; top: -105px; right: 212px; width: 270px; height: 270px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; content: ""; }
-      .cta-copy, .cta-panel > .button { position: relative; z-index: 1; }
-      .cta-copy .eyebrow { color: #d5e0d1; }
-      .cta-copy h2 { max-width: 440px; margin-bottom: 0; font-size: 35px; }
-      .cta-copy h2 em { color: #ffd3b9; font-family: var(--serif); font-weight: 400; }
-
-      footer { padding: 30px 0 25px; border-top: 1px solid var(--line); }
-      .footer-top { display: flex; justify-content: space-between; gap: 30px; padding-bottom: 27px; }
-      .footer-brand p { max-width: 220px; margin: 10px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
-      .footer-links { display: flex; gap: 30px; color: #657068; font-size: 11px; }
-      .footer-bottom { display: flex; justify-content: space-between; padding-top: 17px; border-top: 1px solid var(--line); color: #92988f; font-size: 10px; }
-      .footer-contact { display: flex; gap: 17px; }
-
-      dialog { width: min(460px, calc(100% - 32px)); max-height: calc(100% - 32px); padding: 0; overflow: auto; border: 0; border-radius: 18px; background: var(--cream); color: var(--ink); box-shadow: 0 25px 90px rgba(18, 31, 23, .25); }
-      dialog::backdrop { background: rgba(27, 42, 33, .5); backdrop-filter: blur(3px); }
-      .booking-form { position: relative; padding: 34px; }
-      .dialog-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: white; cursor: pointer; font-size: 18px; }
-      .booking-form h2 { margin-bottom: 8px; font-size: 31px; }
-      .booking-form > p { margin-bottom: 21px; color: var(--muted); font-size: 12px; line-height: 1.6; }
-      .field { margin: 13px 0; }
-      .field label { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 700; }
-      .field input, .field select { width: 100%; height: 43px; padding: 0 12px; border: 1px solid #dfddd4; border-radius: 8px; background: #fff; color: var(--ink); font-size: 12px; }
-      .field input:focus, .field select:focus { outline: 2px solid #9eaf9c; outline-offset: 1px; }
-      .booking-form .button { width: 100%; margin-top: 10px; }
-      .form-success { display: none; padding: 15px 0 5px; text-align: center; }
-      .form-success .service-icon { margin: 0 auto 19px; background: #e1eadc; }
-      .form-success p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-
-      @media (max-width: 760px) {
-        .shell { width: min(100% - 40px, 560px); }
-        header { height: 69px; }
-        .menu-toggle { display: inline-flex; }
-        .nav-links { position: absolute; z-index: 5; top: 103px; right: 20px; left: 20px; display: none; align-items: stretch; gap: 0; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: var(--cream); box-shadow: 0 10px 30px rgba(37, 48, 38, .1); }
-        .nav-links.open { display: flex; flex-direction: column; }
-        .nav-links a:not(.button) { padding: 12px 10px; }
-        .nav-links .button { margin-top: 7px; }
-        .hero { min-height: 0; grid-template-columns: 1fr; gap: 33px; padding: 53px 0 44px; }
-        .hero-copy { padding: 0; }
-        h1 { max-width: 470px; font-size: clamp(46px, 11vw, 63px); }
-        .hero-image-wrap { height: min(95vw, 400px); border-radius: 47% 47% 14px 14px; }
-        .floating-note { right: -8px; bottom: 20px; }
-        .image-caption { top: 25px; left: -8px; width: 79px; height: 79px; font-size: 11px; }
-        .trust-inner { flex-wrap: wrap; justify-content: center; gap: 14px 22px; }
-        .trust-intro { width: 100%; text-align: center; }
-        .trust-item { font-size: 10px; }
-        section.content-section { padding: 70px 0; }
-        .service-grid { grid-template-columns: 1fr; gap: 12px; }
-        .service-card { min-height: 0; padding: 22px; }
-        .service-icon { margin-bottom: 16px; }
-        .service-card p { min-height: 0; }
-        .about-section { padding: 60px 0; }
-        .about-inner { grid-template-columns: 1fr; gap: 35px; }
-        .about-visual img { height: 290px; }
-        .about-stamp { right: -7px; }
-        .about-copy { max-width: none; }
-        .quote-section { padding: 68px 0; }
-        .cta-panel { align-items: flex-start; flex-direction: column; margin-bottom: 52px; padding: 34px 25px; }
-        .cta-copy h2 { font-size: 31px; }
-        .cta-panel::after { right: -80px; }
-        .footer-top { flex-direction: column; }
-        .footer-links { flex-wrap: wrap; gap: 17px 23px; }
-        .footer-bottom { flex-direction: column; gap: 12px; }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="announcement">A little more tail-wagging, right around the corner. <a href="#services">Meet your neighborhood pet people →</a></div>
     <div class="shell">
       <header>
-        <a class="brand" href="#" aria-label="Goodkind home"><span class="brand-mark" aria-hidden="true">g</span>goodkind</a>
+        <a class="brand" href="index.html" aria-label="Goodkind home"><span class="brand-mark" aria-hidden="true">g</span>goodkind</a>
         <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
           <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
         <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
-          <a href="#services">Our services</a>
-          <a href="#about">Our people</a>
-          <a href="#reviews">Kind words</a>
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="aboutus.html">About us</a>
+          <a href="managepets.html">Manage care</a>
+          <a href="analytics.html">Analytics</a>
           <button class="button" type="button" data-book>Find your pet's happy place <span aria-hidden="true">↗</span></button>
         </nav>
       </header>
@@ -402,9 +150,10 @@
               <p>A neighborhood kind of pet care. Here for the whole pack.</p>
             </div>
             <nav class="footer-links" aria-label="Footer navigation">
-              <a href="#services">Services</a>
-              <a href="#about">Our people</a>
-              <a href="#reviews">Kind words</a>
+              <a href="index.html#services">Services</a>
+              <a href="aboutus.html">About us</a>
+              <a href="managepets.html">Manage care</a>
+              <a href="analytics.html">Analytics</a>
               <a href="mailto:hello@goodkindpets.com">Get in touch</a>
             </nav>
           </div>
@@ -452,56 +201,6 @@
       </form>
     </dialog>
 
-    <script>
-      const menuToggle = document.querySelector(".menu-toggle");
-      const navigation = document.querySelector(".nav-links");
-      const bookingDialog = document.querySelector("#booking-dialog");
-      const bookingForm = document.querySelector("#booking-form");
-      const formFields = document.querySelector(".form-fields");
-      const formSuccess = document.querySelector(".form-success");
-
-      menuToggle.addEventListener("click", () => {
-        const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-        menuToggle.setAttribute("aria-expanded", String(!isOpen));
-        menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
-        navigation.classList.toggle("open", !isOpen);
-      });
-
-      navigation.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navigation.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", "Open navigation");
-        });
-      });
-
-      document.querySelectorAll("[data-book]").forEach((trigger) => {
-        trigger.addEventListener("click", (event) => {
-          event.preventDefault();
-          bookingDialog.showModal();
-        });
-      });
-
-      document.querySelector(".dialog-close").addEventListener("click", () => bookingDialog.close());
-      document.querySelector("[data-close-dialog]").addEventListener("click", () => bookingDialog.close());
-      bookingDialog.addEventListener("click", (event) => {
-        if (event.target === bookingDialog) bookingDialog.close();
-      });
-      bookingDialog.addEventListener("close", () => {
-        bookingForm.reset();
-        formFields.hidden = false;
-        formSuccess.style.display = "none";
-      });
-
-      bookingForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (!bookingForm.reportValidity()) return;
-        formFields.hidden = true;
-        formSuccess.style.display = "block";
-        formSuccess.focus();
-      });
-
-      document.querySelector("#year").textContent = new Date().getFullYear();
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
